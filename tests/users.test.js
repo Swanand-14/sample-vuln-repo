@@ -26,4 +26,23 @@ describe('User routes', () => {
     const res = await request(app).get('/health');
     expect(res.statusCode).toBe(200);
   });
+
+  it('should reject bio update without a token', async () => {
+    const res = await request(app)
+      .post('/api/users/profile/bio')
+      .send({ username: 'loginuser', bio: 'hello' });
+    expect(res.statusCode).toBe(401);
+  });
+
+  it('should reject login with wrong password', async () => {
+    await request(app)
+      .post('/api/users/register')
+      .send({ username: 'wrongpassuser', password: 'correctpass' });
+
+    const res = await request(app)
+      .post('/api/users/login')
+      .send({ username: 'wrongpassuser', password: 'wrongpass' });
+
+    expect(res.statusCode).toBe(401);
+  });
 });

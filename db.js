@@ -11,8 +11,7 @@ function insertUser(username, hashedPassword, callback) {
 }
 
 function findUserByUsername(username, callback) {
-  const query = `SELECT * FROM users WHERE username = '${username}'`;
-  db.get(query, callback);
+  db.get('SELECT * FROM users WHERE username = ?', [username], callback);
 }
 
 function updateBio(username, bio, callback) {

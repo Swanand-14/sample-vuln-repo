@@ -2,6 +2,7 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { insertUser, findUserByUsername, updateBio } = require('../db');
+const verifyToken = require('../middleware/authMiddleware');
 
 const router = express.Router();
 
@@ -31,7 +32,7 @@ router.post('/login', (req, res) => {
   });
 });
 
-router.post('/profile/bio', (req, res) => {
+router.post('/profile/bio', verifyToken, (req, res) => {
   const { username, bio } = req.body;
   updateBio(username, bio, function (err) {
     if (err) {

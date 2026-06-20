@@ -1,5 +1,6 @@
 const express = require('express');
 const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
 const userRoutes = require('./routes/users');
 const verifyToken = require('./middleware/authMiddleware');
 
