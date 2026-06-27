@@ -14,7 +14,7 @@ router.post(
 
   "/register",
 
-  // Email validation
+  
 
   body("email")
 
@@ -22,7 +22,7 @@ router.post(
 
     .withMessage("Invalid email format"),
 
-  // Password validation
+ 
 
   body("password")
 
@@ -32,7 +32,7 @@ router.post(
 
   async (req, res) => {
 
-    // Collect validation errors
+    
 
     const errors = validationResult(req);
 
@@ -48,7 +48,7 @@ router.post(
 
     const { email, password } = req.body;
 
-    // pretend DB save
+    
 
     const user = {
 
